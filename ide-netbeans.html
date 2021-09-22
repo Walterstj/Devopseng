@@ -1,0 +1,721 @@
+<h2>JavaFX and NetBeans</h2>
+
+<p>
+    This section explains how to create a JavaFX application in NetBeans.
+    JavaFX 15.0.1 and Apache NetBeans 12.2 were used for the IDE screenshots.
+</p>
+
+<p>
+    Download an appropriate JDK for your operating system and set <kbd>JAVA_HOME</kbd> to the JDK directory.
+    Refer to <a href="#install-java">Install Java</a> section for more information.
+</p>
+
+<p>
+    You can create a JavaFX <span class="JFX_MAJOR">11</span> modular or non-modular project and use the IDE tools,
+    Maven or Gradle build tools.
+</p>
+
+<div class="alert alert-warning">
+    <strong>Note:</strong> We recommend you to use NetBeans 11.3 or later.
+    See the NetBeans bug report <a href="https://issues.apache.org/jira/browse/NETBEANS-3296">NETBEANS-3296</a>,
+    "Attaching JavaFX Javadoc and Sources," for details on the errors that can occur when trying to use the JavaFX
+    API documentation and source code in NetBeans, along with techniques to work around some of the errors.
+</div>
+
+<h3>Non-modular projects</h3>
+
+<div id="NB-IDE"></div><h4>IDE</h4>
+
+<p>
+    Follow these steps to create a JavaFX non-modular project and use the IDE tools to build it and run it.
+    Alternatively, you can download a similar project from <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Java" target="_blank">here</a>.
+</p>
+
+<p>
+    Download the appropriate
+    <a target="_blank" href="https://gluonhq.com/products/javafx/">JavaFX SDK</a>
+    for your operating system and unzip it to a desired location, for instance
+    <kbd>/Users/your-user/Downloads/javafx-sdk-<span class="JFX_MAJOR">11</span></kbd>.
+</p>
+
+<p>
+    Create a new global <kbd>Library</kbd> under <kbd>Tools -> Libraries -> New Library</kbd>.
+    Name it <kbd>JavaFX<span class="JFX_MAJOR">11</span></kbd> and include the jars under the <kbd>lib</kbd> folder from JavaFX <span class="JFX_MAJOR">11</span>.
+    <a href="images/ide/netbeans/ide/netbeans00.png" target="_blank"><img src="images/ide/netbeans/ide/netbeans00.png" alt="Create library"/></a>
+</p>
+
+<div class="alert alert-warning">
+    <strong>Note: </strong>
+    Make sure you don't add the <kbd>src.zip</kbd> file, as it will cause an exception when running the project.
+</div>
+
+<h5>1. Create a Java project</h5>
+
+<p>
+    <a href="images/ide/netbeans/ide/netbeans01.png" target="_blank"><img src="images/ide/netbeans/ide/netbeans01.png" alt="Create a Java project"/></a>
+
+    Provide a name to the project, like <kbd>HelloFX</kbd>, and a location.
+
+    A default project will be opened.
+</p>
+
+<div class="alert alert-danger">
+    <strong>Warning: </strong>
+    Don't try to create a JavaFX project. The JavaFX Ant tasks of the current Apache NetBeans version are not ready for JavaFX 11+ yet, unless you have a custom JDK that bundles JavaFX, as described in <a href="index.html#modular">Custom JDK+JavaFX image</a>.
+</div>
+
+<h5>2. Set JDK</h5>
+
+<p>
+    Make sure your project is configured to run with JDK 11 or later.
+    Go to <kbd>Properties -> Libraries -> Java Platform</kbd>, and set it to your preferred JDK. 
+    <a href="images/ide/netbeans/ide/netbeans02.png" target="_blank"><img src="images/ide/netbeans/ide/netbeans02.png" alt="Set JDK 11"/></a>
+</p>
+
+<h5>3. Add the library</h5>
+
+<p>
+    Go to <kbd>Properties -> Libraries -> Compile -> Classpath -> + -> Add Library </kbd> and add the <kbd>JavaFX<span class="JFX_MAJOR">11</span></kbd> library.
+
+    <a href="images/ide/netbeans/ide/netbeans03.png" target="_blank"><img src="images/ide/netbeans/ide/netbeans03.png" alt="Add jars to classpath"/></a>
+
+    And go to <kbd>Properties -> Build -> Compile</kbd> and make sure you deselect the <kbd>Compile on Save</kbd> option.
+
+    <a href="images/ide/netbeans/ide/netbeans03-2.png" target="_blank"><img src="images/ide/netbeans/ide/netbeans03-2.png" alt="Remove option"/></a>
+</p>
+
+<div class="alert alert-danger">
+    <strong>Warning: </strong>
+    If NetBeans compiles on every save, it will also add the classes to the module-path, preventing any further change to the module-path.
+    Alternatively, this option can be kept selected, and add the <kbd>JavaFX<span class="JFX_MAJOR">11</span></kbd> library to
+    <kbd>Properties -> Libraries -> Run -> Modulepath</kbd>.
+</div>
+
+<p>
+    Once the classpath is set, the JavaFX classes will be recognized by the IDE.
+    For instance, you can start extending the <kbd>Application</kbd> class:
+
+    <a href="images/ide/netbeans/ide/netbeans04.png" target="_blank"><img src="images/ide/netbeans/ide/netbeans04.png" alt="JavaFX jars as library"/></a>
+</p>
+
+<h5>4. Add JavaFX classes</h5>
+
+<p>
+    You can add a main class <kbd>Main</kbd>, based on this <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Java/hellofx/src/hellofx/Main.java" target="_blank">one</a>, 
+    with an <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Java/hellofx/src/hellofx/hellofx.fxml" target="_blank">FXML</a> file and 
+    a <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Java/hellofx/src/hellofx/Controller.java" target="_blank">controller</a>.
+
+    <a href="images/ide/netbeans/ide/netbeans05.png" target="_blank"><img src="images/ide/netbeans/ide/netbeans05.png" alt="Add JavaFX classes"/></a>
+</p>
+
+<div class="alert alert-danger">
+    <strong>Warning: </strong>
+    If you run now the project it will compile but you will get this error:
+
+<pre><code>
+Error: JavaFX runtime components are missing, and are required to run this application
+</code></pre>
+
+    This error is shown since the Java <span class="JDK_MAJOR">11</span> launcher checks if the main class extends 
+    <kbd>javafx.application.Application</kbd>. If that is the case, it is required to 
+    have the <kbd>javafx.graphics</kbd> module on the module-path.
+
+</div>
+
+<h5>5. Add VM options</h5>
+
+<p>
+    To solve the issue, go to <kbd>Properties -> Run</kbd> and add these VM options:
+</p>
+
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#nix-nb-non-ide-1" data-toggle="tab">Linux/Mac</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#win-nb-non-ide-1" data-toggle="tab">Windows</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="nix-nb-non-ide-1">
+<pre class="no-border-radius"><code>
+--module-path /path/to/javafx-sdk-<span class="JFX_VERSION">11</span>/lib --add-modules javafx.controls,javafx.fxml
+</code></pre>
+    </div>
+    <div class="tab-pane" id="win-nb-non-ide-1">
+<pre><code>
+--module-path "\path\to\javafx-sdk-<span class="JFX_VERSION">11</span>\lib" --add-modules javafx.controls,javafx.fxml
+</code></pre>
+    </div>
+</div>
+
+<p>
+    <a href="images/ide/netbeans/ide/netbeans06.png" target="_blank"><img src="images/ide/netbeans/ide/netbeans06.png" alt="VM options"/></a>
+    Click apply and close the dialog.
+</p>
+
+<h5>6. Run the project</h5>
+
+<p>
+    Click <kbd>Run -> Run Project</kbd> to run the project, now it should work fine.
+</p>
+
+<div id="NB-Maven"></div><h4>Maven</h4>
+
+<p>
+    Follow these steps to create a JavaFX non-modular project and use the Maven tools to build it and run it.
+
+    Alternatively, you can download a similar project from <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Maven" target="_blank">here</a>.
+</p>
+
+<h5>1. Create a Maven project</h5>
+
+<p>
+    You can select either <kbd>Java with Maven -> Simple JavaFX Maven Archetype</kbd> project or <kbd>Java with Maven -> FXML JavaFX Maven Archetype</kbd> if your project is using FXML.
+    
+    <a href="images/ide/netbeans/maven/netbeans01.png" target="_blank"><img src="images/ide/netbeans/maven/netbeans01.png" alt="Create a Maven project"/></a>
+</p>
+
+<p>
+    Provide the name of the project, like <kbd>hellofx</kbd> and a location.
+    Provide the groupId, like <kbd>org.openjfx</kbd>, and the package name, like <kbd>org.openjfx.hellofx</kbd>.
+    Optionally, you can set the <kbd>javafx-version</kbd> to <span class="JFX_VERSION">12</span> and the <kbd>javafx-maven-plugin-version</kbd> to to <span class="JFX_MVN_PLUGIN_VERSION">0.0.1</span>:
+
+    <a href="images/ide/netbeans/maven/netbeans03.png" target="_blank"><img src="images/ide/netbeans/maven/netbeans03.png" alt="Archetype options"/></a>
+
+    Click finish and the project will be created and opened.
+</p>
+
+<h5>2. Verify the pom</h5>
+
+<p>
+    You can find the generated pom file <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Maven/hellofx/pom.xml" target="_blank">here</a>.
+</p>
+
+<p>
+    Verify it includes the <kbd>javafx.controls</kbd> and <kbd>javafx.fxml</kbd> dependencies, update their version to <span class="JFX_VERSION">12</span>,
+    and verify it includes the <kbd>javafx-maven-plugin</kbd> (update the version to <span class="JFX_MVN_PLUGIN_VERSION">0.0.1</span>). Note that Maven manages
+    the required dependencies: it will add <kbd>javafx.base</kbd> and
+    <kbd>javafx.graphics</kbd> that are required by <kbd>javafx.controls</kbd> and <kbd>javafx.fxml</kbd>,
+    but most important, it will add the required classifier based on your platform, downloading
+    the specific platform jars. As for any other maven dependencies, these jars can be found in the local <kbd>.m2</kbd> repository.
+
+    <a href="images/ide/netbeans/maven/netbeans04.png" target="_blank"><img src="images/ide/netbeans/maven/netbeans04.png" alt="Maven pom"/></a>
+
+    For a non-modular project, you can remove the <kbd>module-info.java</kbd> file.
+</p>
+
+<h5>3. Run the project</h5>
+
+<p>
+    Click <kbd>Run -> Run Project</kbd> to run the project.
+    Note that the Maven project already includes an <kbd>nbactions.xml</kbd> file that maps the <kbd>run</kbd> action to the <kbd>javafx:run</kbd> goal.
+</p>
+
+<div class="alert alert-warning">
+    <strong>Note: </strong>
+    In case <kbd>JAVA_HOME</kbd> is not set to 11 or greater, running the project might
+    fail. To avoid it, you can add the correct <kbd>java</kbd> command to the javafx-maven-plugin:
+    <kbd>&lt;configuration&gt;&lt;executable&gt;/path/to/jdk-<span class="JDK_MAJOR">11</span>/bin/java&lt;/executable&gt;&lt;/configuration&gt;</kbd>.
+</div>
+
+<p>
+    You can also open a terminal and type <kbd>mvn clean javafx:run</kbd> to run the project.
+</p>
+
+<div id="NB-Gradle"></div><h4>Gradle</h4>
+
+<p>
+    Follow these steps to create a JavaFX non-modular project and use the Gradle tools to build it and run it.
+
+    Alternatively, you can download a similar project from <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Gradle" target="_blank">here</a>.
+</p>
+
+<p>
+    Since NetBeans 11, Gradle is supported out of the box, but if you run an older version, you will need the Gradle plugin
+    for NetBeans 2.0.2. You can download it from the GitHub
+    <a href="https://github.com/kelemen/netbeans-gradle-project/releases" target="_blank">repository</a>.
+</p>
+
+<h5>1. Create a Gradle project</h5>
+
+<p>
+    Create a <kbd>Java with Gradle -> Java Application</kbd> project.
+    <a href="images/ide/netbeans/gradle/netbeans01.png" target="_blank"><img src="images/ide/netbeans/gradle/netbeans01.png" alt="Create a Gradle project"/></a>
+   
+    Provide the name of the project, like <kbd>HelloFX</kbd> and a location for the project, provide
+    the package name, like <kbd>org.openjfx</kbd> and the main class, like <kbd>MainApp</kbd>. Finally, select
+    <kbd>Initialize Gradle Wrapper</kbd>.
+
+    <a href="images/ide/netbeans/gradle/netbeans02.png" target="_blank"><img src="images/ide/netbeans/gradle/netbeans02.png" alt="Name project"/></a>
+
+    The project is created and opened.
+</p>
+
+
+<div class="alert alert-warning">
+    <strong>Note: </strong>
+    Currently, the JavaFX Gradle plugin requires that the gradle wrapper is set to a top value of 6.3.
+    Set the value of <kbd>distributionUrl</kbd> accordingly in the <kbd>gradle/wrapper/gradle-wrapper.properties</kbd> file.
+</div>
+
+<h5>2. Modify the build</h5>
+
+<p>
+    Edit the <kbd>build.gradle</kbd> file and replace it with this
+    <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Gradle/hellofx/build.gradle" target="_blank">build</a> file.
+</p>
+<p>
+    We can declare the required JavaFX modules in the <kbd>build.gradle</kbd> file using the JavaFX gradle plugin:
+</p>
+<pre><code>
+javafx {
+    version = "<span class="JFX_VERSION">12</span>"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+</code></pre>
+
+<div class="alert alert-warning">
+    <strong>Note: </strong>
+    If NetBeans is running with a JDK lower than 11 the plugin might not work. Either edit the <kbd>netbeans/etc/netbeans.conf</kbd> file and
+    set <kbd>netbeans_jdkhome</kbd> accordingly, or do the same with the <kbd>~/.gradle/gradle.properties</kbd> file, setting <kbd>org.gradle.java.home</kbd>.
+</div>
+
+<p>
+    Save the project and you will get the JavaFX dependencies.
+
+    <a href="images/ide/netbeans/gradle/netbeans03.png" target="_blank"><img src="images/ide/netbeans/gradle/netbeans03.png" alt="Update the build"/></a>
+
+    As for any other Gradle dependencies, these jars can be found in the local <kbd>.gradle</kbd> repository.
+</p>
+
+<h5>3. Add the source code</h5>
+
+<p>
+    Based on this <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Gradle/hellofx/src/main/java/org/openjfx/MainApp.java" target="_blank">MainApp</a> class, 
+    add its content to the project main class. Then add the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Gradle/hellofx/src/main/java/org/openjfx/FXMLController.java" target="_blank">controller</a> 
+    and the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Gradle/hellofx/src/main/resources/org/openjfx/scene.fxml" target="_blank">FXML</a> and 
+    and the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Non-Modular/Gradle/hellofx/src/main/resources/org/openjfx/styles.css" target="_blank">css</a>  
+    files.
+
+    <a href="images/ide/netbeans/gradle/netbeans04.png" target="_blank"><img src="images/ide/netbeans/gradle/netbeans04.png" alt="Add JavaFX project"/></a>
+</p>
+
+<h5>4. Run the project</h5>
+
+<p>
+    You can directly run from the <kbd>Run Project</kbd> button.
+    But you can also select the <kbd>build.gradle</kbd> file and visualize the Navigator window.
+    Build the project with <kbd>Build -> build</kbd> and click on <kbd>Application -> run</kbd>
+    to execute the project.
+    
+    <a href="images/ide/netbeans/gradle/netbeans05.png" target="_blank"><img src="images/ide/netbeans/gradle/netbeans05.png" alt="Run project"/></a>
+</p>
+<p>
+    You can also open a terminal and run:
+</p>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#nix-nb-non-gradle-1" data-toggle="tab">Linux/Mac</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#win-nb-non-gradle-1" data-toggle="tab">Windows</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="nix-nb-non-gradle-1">
+<pre class="no-border-radius"><code>
+./gradlew run
+</code></pre>
+    </div>
+    <div class="tab-pane" id="win-nb-non-gradle-1">
+<pre><code>
+gradlew run
+</code></pre>
+    </div>
+</div>
+
+<h3>Modular projects</h3>
+
+<p>
+    Download the appropriate
+    <a target="_blank" href="https://gluonhq.com/products/javafx/">JavaFX jmods</a>
+    for your operating system and unzip it to a desired location, for instance
+    <kbd>/Users/your-user/Downloads/javafx-jmods-<span class="JFX_MAJOR">11</span></kbd>.
+</p>
+
+<div id="NB-Mod-IDE"></div><h4>IDE</h4>
+
+<p>
+    Follow these steps to create a JavaFX modular project and use the IDE tools to build it and run it. 
+    
+    Alternatively, you can download a similar project from <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Java" target="_blank">here</a>.
+</p>
+
+<h5>1. Create a Java modular project</h5>
+    
+<p>
+    <a href="images/ide/netbeans/modular/ide/netbeans01.png" target="_blank"><img src="images/ide/netbeans/modular/ide/netbeans01.png" alt="Java modular project"/></a>
+
+    Provide a name to the project, like <kbd>HelloFX</kbd>, and a location. Select also platform JDK 11 or greater.
+
+    When the project opens, right click on it and add <kbd>New -> Module...</kbd>, named it <kbd>hellofx</kbd>, and add a package like <kbd>org.openjfx</kbd> with an empty <kbd>MainApp</kbd> class.
+</p>
+
+<h5>2. Add the library</h5>
+
+<p>
+    As explained for Non-modular projects, define the <kbd>JavaFX<span class="JFX_MAJOR">11</span></kbd> library, if you haven't done it already.
+</p>
+
+<p>
+    Go to <kbd>Properties -> Libraries -> Compile -> Modulepath -> + -> Add Library </kbd> and
+    add the <kbd>JavaFX<span class="JFX_MAJOR">11</span></kbd> library.
+
+    <a href="images/ide/netbeans/modular/ide/netbeans00.png" target="_blank"><img src="images/ide/netbeans/modular/ide/netbeans00.png" alt="JavaFX Library"/></a>
+</p>
+
+<h5>3. Edit the module-info class</h5>
+
+<p>
+    Edit the <kbd>module-info</kbd> class and include the required modules <kbd>javafx.controls</kbd> and <kbd>javafx.fxml</kbd>. 
+    Since FXML uses reflection to access the controller in the module, this has to be opened to <kbd>javafx.fxml</kbd>. Finally,
+    export the package <kbd>org.openjfx</kbd>.
+
+    <a href="images/ide/netbeans/modular/ide/netbeans02.png" target="_blank"><img src="images/ide/netbeans/modular/ide/netbeans02.png" alt="module-info"/></a>
+</p>
+
+<h5>4. Add the source code</h5>
+
+<p>
+    Based on this <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Java/HelloFX/src/hellofx/classes/org/openjfx/MainApp.java" target="_blank">MainApp</a> class, 
+    add its content to the project main class. Then add the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Java/HelloFX/src/hellofx/classes/org/openjfx/FXMLController.java" target="_blank">controller</a> 
+    and the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Java/HelloFX/src/hellofx/classes/org/openjfx/scene.fxml" target="_blank">FXML</a> and 
+    and the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Java/HelloFX/src/hellofx/classes/org/openjfx/styles.css" target="_blank">css</a>  
+    files.
+    
+    <a href="images/ide/netbeans/modular/ide/netbeans03.png" target="_blank"><img src="images/ide/netbeans/modular/ide/netbeans03.png" alt="Source code"/></a>
+</p>
+
+<h5>5. Run the project</h5>
+
+<p>
+    Being a modular project, and since we already added the <kbd>JavaFX<span class="JFX_MAJOR">11</span></kbd> library to the module-path,
+    there is no need to add any VM arguments.
+    
+    Click <kbd>Run -> Run...</kbd> to run the project.
+</p>
+
+<h5>6. Create a custom runtime image</h5>
+
+<p>
+    To create a runtime image, create a global Library under <kbd>NetBeans -> Tools -> Libraries -> New Library</kbd>. 
+    Name it <kbd>JavaFXMODS<span class="JFX_MAJOR">11</span></kbd> and include the folder with the JavaFX jmods <span class="JFX_VERSION">11</span>.
+
+    Add this library to <kbd>NetBeans -> Properties -> Libraries -> Run -> Modulepath</kbd> and place it on top.
+
+    <a href="images/ide/netbeans/modular/ide/netbeans04.png" target="_blank"><img src="images/ide/netbeans/modular/ide/netbeans04.png" alt="jmods library"/></a>
+</p>
+
+<p>
+    To create the custom runtime image now, go to <kbd>NetBeans -> Properties -> Build -> Packaging</kbd> and
+    select <kbd>Create JLINK distribution</kbd>, providing a name for the launcher, like <kbd>HelloFX</kbd>.
+    <a href="images/ide/netbeans/modular/ide/netbeans05.png" target="_blank"><img src="images/ide/netbeans/modular/ide/netbeans05.png" alt="jlink task"/></a>
+
+    Apply and close the dialog, and click the <kbd>Clean and Build</kbd> button, to build the image.
+</p>
+
+<p>
+    To run the image:
+</p>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#nix-nb-mod-ide-1" data-toggle="tab">Linux/Mac</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#win-nb-mod-ide-1" data-toggle="tab">Windows</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="nix-nb-mod-ide-1">
+<pre class="no-border-radius"><code>
+dist/jlink/HelloFX/bin/HelloFX
+</code></pre>
+    </div>
+    <div class="tab-pane" id="win-nb-mod-ide-1">
+<pre><code>
+dist\jlink\HelloFX\bin\HelloFX
+</code></pre>
+    </div>
+</div>
+
+<div id="NB-Mod-Maven"></div><h4>Maven</h4>
+
+<p>
+    Follow these steps to create a JavaFX modular project and use the Maven tools to build it and run it.
+    
+    Alternatively, you can download a similar project from <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Maven" target="_blank">here</a>.
+</p>
+
+<h5>1. Create a Maven project</h5>
+
+<p>
+    You can select either <kbd>Java with Maven -> Simple JavaFX Maven Archetype</kbd> project or <kbd>Java with Maven -> FXML JavaFX Maven Archetype</kbd> if your project is using FXML.
+
+    <a href="images/ide/netbeans/modular/maven/netbeans01.png" target="_blank"><img src="images/ide/netbeans/modular/maven/netbeans01.png" alt="Create a Maven project"/></a>
+</p>
+
+<p>
+    Provide the name of the project, like <kbd>hellofx</kbd> and a location.
+    Provide the groupId, like <kbd>org.openjfx</kbd>, and the package name, like <kbd>org.openjfx.hellofx</kbd>.
+    Optionally, you can set the <kbd>javafx-version</kbd> to <span class="JFX_VERSION">12</span> and the <kbd>javafx-maven-plugin-version</kbd> to to <span class="JFX_MVN_PLUGIN_VERSION">0.0.1</span>:
+
+    <a href="images/ide/netbeans/modular/maven/netbeans03.png" target="_blank"><img src="images/ide/netbeans/modular/maven/netbeans03.png" alt="Archetype options"/></a>
+
+    Click finish and the project will be created and opened.
+</p>
+
+<h5>2. Verify the pom</h5>
+
+<p>
+    You can find the generated pom file <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Maven/hellofx/pom.xml" target="_blank">here</a>.
+</p>
+
+<p>
+    Verify it includes the <kbd>javafx.controls</kbd> and <kbd>javafx.fxml</kbd> dependencies,
+    and verify it includes the <kbd>javafx-maven-plugin</kbd>. Note that Maven manages
+    the required dependencies: it will add <kbd>javafx.base</kbd> and
+    <kbd>javafx.graphics</kbd> that are required by <kbd>javafx.controls</kbd> and <kbd>javafx.fxml</kbd>,
+    but most important, it will add the required classifier based on your platform, downloading
+    the specific platform jars. As for any other maven dependencies, these jars can be found in the local <kbd>.m2</kbd> repository.
+
+    <a href="images/ide/netbeans/modular/maven/netbeans04.png" target="_blank"><img src="images/ide/netbeans/modular/maven/netbeans04.png" alt="Maven pom"/></a>
+</p>
+
+<h5>3. Run the project</h5>
+
+<p>
+    Click <kbd>Run -> Run Project</kbd> to run the project.
+    Note that the Maven project already includes an <kbd>nbactions.xml</kbd> file that maps the <kbd>run</kbd> action to the <kbd>javafx:run</kbd> goal.
+</p>
+
+<div class="alert alert-warning">
+    <strong>Note: </strong>
+    In case <kbd>JAVA_HOME</kbd> is not set to JDK 11 or greater, running the project might
+    fail. To avoid it, you can add the correct <kbd>java</kbd> command to the <kbd>javafx-maven-plugin</kbd>:
+    <kbd>&lt;configuration&gt;&lt;executable&gt;/path/to/jdk-<span class="JDK_MAJOR">11</span>/bin/java&lt;/executable&gt;&lt;/configuration&gt;</kbd>.
+</div>
+
+<p>
+    You can also open a terminal and run <kbd>mvn clean javafx:run</kbd> to run the project.
+</p>
+
+<h5>6. Create a custom runtime image</h5>
+
+<p>
+    To create a runtime image, run the following commands:
+</p>
+
+<pre><code>
+mvn clean javafx:jlink
+</code></pre>
+
+<p>
+    Note the plugin allows the usual options as the <kbd>jlink</kbd> command, as well as creating a
+    launcher or a zip with the custom image.
+</p>
+
+<p>
+    And after the image is built, you can run it from command line:
+</p>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#nix-nb-mod-mav-1" data-toggle="tab">Linux/Mac</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#win-nb-mod-mav-1" data-toggle="tab">Windows</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="nix-nb-mod-mav-1">
+<pre class="no-border-radius"><code>
+target/hellofx/bin/launcher
+</code></pre>
+    </div>
+    <div class="tab-pane" id="win-nb-mod-mav-1">
+<pre><code>
+target\hellofx\bin\launcher
+</code></pre>
+    </div>
+</div>
+
+<div id="NB-Mod-Gradle"></div><h4>Gradle</h4>
+
+<p>
+    Follow these steps to create a JavaFX modular project and use the Gradle tools to build it and run it.
+    
+    Alternatively, you can download a similar project from <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Gradle" target="_blank">here</a>.
+</p>
+
+<h5>1. Create a Gradle project</h5>
+
+<p>
+    Create a <kbd>Java with Gradle -> Java Application</kbd> project.
+    <a href="images/ide/netbeans/modular/gradle/netbeans01.png" target="_blank"><img src="images/ide/netbeans/modular/gradle/netbeans01.png" alt="Create a Gradle project"/></a>
+
+    Provide the name of the project, like <kbd>HelloFX</kbd> and a location for the project, provide
+    the package name, like <kbd>org.openjfx</kbd> and the main class, like <kbd>MainApp</kbd>. Finally, select
+    <kbd>Initialize Gradle Wrapper</kbd>.
+
+    The project is created and opened.
+</p>
+
+<div class="alert alert-warning">
+    <strong>Note: </strong>
+    Currently, the JavaFX Gradle plugin requires that the gradle wrapper is set to a top value of 6.3.
+    Set the value of <kbd>distributionUrl</kbd> accordingly in the <kbd>gradle/wrapper/gradle-wrapper.properties</kbd> file.
+</div>
+
+<h5>2. Modify the build</h5>
+
+<p>
+    Edit the <kbd>build.gradle</kbd> file and replace it with this
+    <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Gradle/hellofx/build.gradle" target="_blank">build</a> file.
+</p>
+<p>
+    We can declare the required JavaFX modules in the <kbd>build.gradle</kbd> file using the JavaFX gradle plugin:
+</p>
+
+<pre><code>
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+</code></pre>
+
+<div class="alert alert-warning">
+    <strong>Note: </strong>
+    If NetBeans is running with a JDK lower than 11 the plugin might not work. Either edit the <kbd>netbeans/etc/netbeans.conf</kbd> file and
+    set <kbd>netbeans_jdkhome</kbd> accordingly, or do the same with the <kbd>~/.gradle/gradle.properties</kbd> file, setting <kbd>org.gradle.java.home</kbd>.
+</div>
+
+<p>
+    Save the project and you will get the JavaFX dependencies.
+
+    As for any other Gradle dependencies, these jars can be found in the local <kbd>.gradle</kbd> repository.
+</p>
+
+<h5>3. Add the module-info class</h5>
+
+<p>
+    Add the <kbd>module-info</kbd> class, including the required modules <kbd>javafx.controls</kbd> and <kbd>javafx.fxml</kbd>. 
+    Since FXML uses reflection to access the controller in the module, this has to be opened to <kbd>javafx.fxml</kbd>. Finally,
+    export the package <kbd>org.openjfx</kbd>.
+    
+    <a href="images/ide/netbeans/modular/gradle/netbeans03.png" target="_blank"><img src="images/ide/netbeans/modular/gradle/netbeans03.png" alt="module-info"/></a>
+
+    Reload the project to take into account all the changes in the gradle project.
+</p>
+
+<h5>4. Add the source code</h5>
+
+<p>
+    Based on this <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Gradle/hellofx/src/main/java/org/openjfx/MainApp.java" target="_blank">MainApp</a> class, 
+    add its content to the project main class. Then add the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Gradle/hellofx/src/main/java/org/openjfx/FXMLController.java" target="_blank">controller</a> 
+    and the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Gradle/hellofx/src/main/resources/org/openjfx/scene.fxml" target="_blank">FXML</a> and 
+    the <a class="samples" href="https://github.com/openjfx/samples/blob/master/IDE/NetBeans/Modular/Gradle/hellofx/src/main/resources/org/openjfx/styles.css" target="_blank">css</a>
+    files.
+
+    <a href="images/ide/netbeans/modular/gradle/netbeans04.png" target="_blank"><img src="images/ide/netbeans/modular/gradle/netbeans04.png" alt="Source files"/></a>
+
+</p>
+
+<h5>5. Run the project</h5>
+
+<p>
+    Right click on the project window, select <kbd>Tasks -> build -> build</kbd> to
+    build the project, and on <kbd>Tasks -> run -> run</kbd> to execute the project.
+
+    You can also open a terminal and run:
+</p>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#nix-nb-mod-gra-1" data-toggle="tab">Linux/Mac</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#win-nb-mod-gra-1" data-toggle="tab">Windows</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="nix-nb-mod-gra-1">
+<pre class="no-border-radius"><code>
+./gradlew run
+</code></pre>
+    </div>
+    <div class="tab-pane" id="win-nb-mod-gra-1">
+<pre><code>
+gradlew run
+</code></pre>
+    </div>
+</div>
+
+<h5>6. Create a custom runtime image</h5>
+
+<p>
+    To create a custom runtime, you can use the <a href="https://badass-jlink-plugin.beryx.org/releases/latest/" target="_blank">org.beryx.jlink</a> plugin.
+    It can be easily combined with the JavaFX Gradle plugin:
+</p>
+
+<pre><code>
+plugins {
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '<span class="JFX_PLUGIN_VERSION">0.0.7</span>'
+  id 'org.beryx.jlink' version '<span class="JLINK_PLUGIN_VERSION">2.9.4</span>'
+}
+
+javafx {
+    version = "<span class="JFX_VERSION">12</span>"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+jlink {
+    launcher {
+        name = 'hellofx'
+    }
+}
+</code></pre>
+
+<p>
+    to generate the custom image. Right click on the project window, select <kbd>Tasks -> jlink -> jlink</kbd>
+    task to create the image.
+</p>
+
+<p>
+    To run the image, run from a terminal:
+</p>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#nix-idea-mod-gra-1" data-toggle="tab">Linux/Mac</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#win-idea-mod-gra-1" data-toggle="tab">Windows</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="nix-idea-gra-mav-1">
+<pre class="no-border-radius"><code>
+build/image/bin/hellofx
+</code></pre>
+    </div>
+    <div class="tab-pane" id="win-idea-gra-mav-1">
+<pre><code>
+build\image\bin\hellofx
+</code></pre>
+    </div>
+</div>

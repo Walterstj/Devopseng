@@ -1,0 +1,79 @@
+<h2>Run HelloWorld using Maven</h2>
+
+<p>
+    If you want to develop JavaFX applications using Maven, you don't have to download
+    the JavaFX SDK. Just specify the modules and the versions you want in the <kbd>pom.xml</kbd>,
+    and the build system will download the required modules, including the native libraries for your platform.
+</p>
+<p>
+    Here is a <a class="samples" href="https://github.com/openjfx/samples/blob/master/HelloFX/Maven/hellofx/pom.xml" target="_blank">pom.xml</a> 
+    file which shows how to achieve this, included in this <a class="samples" href="https://github.com/openjfx/samples/blob/master/HelloFX/Maven" target="_blank">sample</a>.
+</p>
+<p>
+    Alternatively, we have created <a href="https://github.com/openjfx/javafx-maven-archetypes" target="_blank">JavaFX Maven Archetypes</a> to quickly create Maven projects.
+    A simple JavaFX project can be created by executing the following command:
+</p>
+
+<pre><code>
+mvn archetype:generate \
+        -DarchetypeGroupId=org.openjfx \
+        -DarchetypeArtifactId=javafx-archetype-simple \
+        -DarchetypeVersion=0.0.3 \
+        -DgroupId=org.openjfx \
+        -DartifactId=sample \
+        -Dversion=1.0.0 \
+        -Djavafx-version=<span class="JFX_VERSION">11</span>
+</code></pre>
+
+<p>
+    The pom uses the <a href="https://github.com/openjfx/javafx-maven-plugin" target="_blank">JavaFX Maven plugin</a>:
+</p>
+
+<pre><code>
+&lt;plugins&gt;
+    &lt;plugin&gt;
+        &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
+        &lt;artifactId&gt;javafx-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;<span class="JFX_MVN_PLUGIN_VERSION">0.0.1</span>&lt;/version&gt;
+        &lt;configuration&gt;
+            &lt;mainClass&gt;HelloFX&lt;/mainClass&gt;
+        &lt;/configuration&gt;
+    &lt;/plugin&gt;
+&lt;/plugins&gt;
+</code></pre>
+
+<p>
+    Add the maven dependencies:
+</p>
+
+<pre><code>
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.openjfx&lt;/groupId&gt;
+    &lt;artifactId&gt;javafx-controls&lt;/artifactId&gt;
+    &lt;version&gt;<span class="JFX_VERSION">11</span>&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>
+    <b>Important</b>: Note that transitive dependencies are automatically resolved
+    (for instance, there is no need to add a dependency for the <kbd>javafx.graphics</kbd> module, since it is
+    <a href="https://openjfx.io/javadoc/15/javafx.controls/module-summary.html" target="_blank">transitively</a> resolved by the
+    <kbd>javafx.controls</kbd> module). But if your application is using <kbd>FXML</kbd>, you will need to
+    add a dependency for the <kbd>javafx.fxml</kbd> module as well.
+</p>
+
+<p>
+    Finally, run the application (e.g. based on the <a class="samples" href="https://github.com/openjfx/samples/blob/master/HelloFX/Maven/hellofx/src/main/java/HelloFX.java" target="_blank">HelloFX.java</a>
+    from the referred sample):
+</p>
+
+<pre><code>
+mvn clean javafx:run
+</code></pre>
+
+<div class="alert alert-warning">
+    <strong>Note: </strong>
+    Make sure to set the JAVA_HOME environment variable to the correct JDK location.
+</div>
